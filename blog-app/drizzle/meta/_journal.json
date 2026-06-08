@@ -8,6 +8,13 @@
       "when": 1780831587333,
       "tag": "0000_secret_apocalypse",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1780916265403,
+      "tag": "0001_gigantic_scarecrow",
+      "breakpoints": true
     }
   ]
 }
