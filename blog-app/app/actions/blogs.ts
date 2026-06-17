@@ -16,20 +16,20 @@ export const createBlog = async (
 
   const title = formData.get("title") as string
   if (!title || title.length < 5) {
-    return { error: "Blog title must be at least 5 characters long" }
+    return { error: "Blog title must be at least 5 characters long", success: false }
   }
   const author = formData.get("author") as string
   if (!author || author.length < 5) {
-    return { error: "Blog author must be at least 5 characters long" }
+    return { error: "Blog author must be at least 5 characters long", success: false }
   }
   const url = formData.get("url") as string
   if (!url || url.length < 5) {
-    return { error: "URL must be at least 5 characters long" }
+    return { error: "URL must be at least 5 characters long", success: false }
   }
   await addBlog(title, author, url, 0)
 
   revalidatePath("/blogs")
-  redirect("/blogs")
+  return { error: "", success: true }
 }
 
 export const incrementBlogLike = async (formData: FormData) => {

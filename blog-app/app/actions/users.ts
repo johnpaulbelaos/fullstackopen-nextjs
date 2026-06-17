@@ -1,6 +1,5 @@
 "use server"
 
-import { redirect } from "next/navigation"
 import bcrypt from "bcryptjs"
 import { eq } from "drizzle-orm"
 import { db } from "@/db"
@@ -36,12 +35,12 @@ export const registerUser = async (
   }
 
   if (errors.error) {
-    return { errors, values: { username, name, password, passwordConfirm } }
+    return { errors, values: { username, name, password, passwordConfirm }, success: false }
   }
 
   const passwordHash = await bcrypt.hash(password, 10)
 
   await db.insert(users).values({ username, name, passwordHash })
 
-  redirect("/login")
+  return { errors, values: { username, name, password, passwordConfirm }, success: true }
 }

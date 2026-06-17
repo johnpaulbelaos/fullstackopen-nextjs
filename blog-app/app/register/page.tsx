@@ -1,11 +1,24 @@
 "use client"
 
-import { useActionState } from "react"
+import { useActionState, useEffect } from "react"
 import { registerUser } from "../actions/users"
+import { useRouter } from "next/navigation"
+import { useNotification } from "../components/NotificationContext"
 
 export default function RegisterPage() {
-  const initialState = { errors: { error: "" }, values: { username: "", name: "", password: "", passwordConfirm: "" } }
+  const initialState = { errors: { error: "" }, values: { username: "", name: "", password: "", passwordConfirm: "" }, success: false }
   const [state, formAction] = useActionState(registerUser, initialState)
+  const { showNotification } = useNotification()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (state.success) {
+      showNotification("account created")
+      router.push("/login")
+    } else {
+      showNotification(state.errors.error, 'error')
+    }
+  }, [state, showNotification, router])
 
   return (
     <div>
@@ -36,7 +49,6 @@ export default function RegisterPage() {
           </label>
         </div>
         <button type="submit">Register</button>
-        {state.errors.error && <p style={{ color: "red" }}>{state.errors.error}</p>}
       </form>
     </div>
   )
