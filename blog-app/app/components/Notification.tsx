@@ -10,7 +10,6 @@ export default function Notification() {
   const style: React.CSSProperties = {
     padding: "10px 16px",
     marginBottom: "10px",
-    borderRadius: "4px",
     color: "white",
     backgroundColor: type === "success" ? "#16a34a" : "#dc2626",
   }

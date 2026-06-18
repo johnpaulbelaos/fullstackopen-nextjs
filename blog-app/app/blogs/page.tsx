@@ -8,18 +8,19 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{filter?: string}
   const blogs = await getBlogs(filter || '')
 
   return (
-    <div>
-      <h2>Blogs</h2>
+    <div className="max-w-2xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-4">Blogs</h2>
       <form action={searchFilter}>
         <div>
-          <input type="text" name="filter" />
+          <input type="text" name="filter" className="border rounded-sm p-1" />
         </div>
-        <button type="submit">Search</button>
+        <button type="submit" className="border rounded-sm p-0.5 bg-blue-100 hover:bg-blue-200">Search</button>
       </form>
-      <ul>
+      <br/>
+      <ul className="space-y-2">
         {blogs.map((blog) => (
-          <li key={blog.id}>
-            <Link href={`/blogs/${blog.id}`}>
+          <li key={blog.id} className="border rounded p-3 hover:bg-gray-100">
+            <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:underline">
               {blog.title} {"by"} {blog.author} {"from"} {blog.url} {"with"} {blog.likes} {"likes"}
             </Link>
           </li>

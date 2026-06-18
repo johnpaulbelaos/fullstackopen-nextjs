@@ -20,28 +20,28 @@ const NewBlog = () => {
   }, [state, showNotification, router])
 
   return (
-    <div>
-      <h2>Create a new blog</h2>
+    <div className="border rounded-l border-gray-300 max-w-2xl mx-auto my-16 p-6">
+      <h2 className="text-2xl font-bold mb-2">Create a new blog</h2>
       <form action={formAction}>
         <div>
           <label>
-            Title
-            <input type="text" name="title" required minLength={5} />
+            Title <br/>
           </label>
+            <input type="text" name="title" required minLength={5} className="border rounded-sm mb-3 p-1"/>
         </div>
         <div>
           <label>
-            Author
-            <input type="text" name="author" required minLength={5} />
+            Author <br/>
           </label>
+            <input type="text" name="author" required minLength={5} className="border rounded-sm mb-3 p-1"/>
         </div>
         <div>
           <label>
-            URL
-            <input type="text" name="url" required minLength={5} />
+            URL <br/>
           </label>
+            <input type="text" name="url" required minLength={5} className="border rounded-sm mb-1 p-1"/>
         </div>
-        <button type="submit">Create</button>
+        <button type="submit" className="border-hidden bg-blue-400 text-white hover:bg-blue-600 rounded mt-2 px-2">Create</button>
       </form>
     </div>
   )
