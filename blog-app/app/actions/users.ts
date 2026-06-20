@@ -1,9 +1,11 @@
 "use server"
 
 import bcrypt from "bcryptjs"
+import { revalidatePath } from "next/cache"
 import { eq } from "drizzle-orm"
 import { db } from "@/db"
 import { users } from "@/db/schema"
+import { generateToken } from "../services/users"
 
 export const registerUser = async (
   prevState: { errors: { error: string }, values: { username: string, name: string, password: string, passwordConfirm: string }},
@@ -43,4 +45,10 @@ export const registerUser = async (
   await db.insert(users).values({ username, name, passwordHash })
 
   return { errors, values: { username, name, password, passwordConfirm }, success: true }
+}
+
+export const generateUserToken = async (formData: FormData) => {
+  const id = Number(formData.get("id"))
+  await generateToken(id)
+  revalidatePath("/me")
 }

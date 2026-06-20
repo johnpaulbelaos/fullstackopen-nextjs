@@ -7,7 +7,7 @@ interface NavLinkProps {
 
 const NavLink = ({ href, children }: NavLinkProps) => {
   return (
-    <Link href={href} className="hover:text-gray-300">
+    <Link href={href} className="hover:text-gray-300 focus:underline focus:font-bold underline-offset-4">
       {children}
     </Link>
   )

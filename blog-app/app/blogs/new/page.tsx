@@ -4,11 +4,13 @@ import { useActionState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { createBlog } from "../../actions/blogs"
 import { useNotification } from "../../components/NotificationContext"
+import { useSession } from "next-auth/react"
 
 const NewBlog = () => {
   const [state, formAction] = useActionState(createBlog, { error: "", success: false })
   const { showNotification } = useNotification()
   const router = useRouter()
+  const { data: session } = useSession()
 
   useEffect(() => {
     if (state.success) {
@@ -18,6 +20,26 @@ const NewBlog = () => {
       showNotification(state.error)
     }
   }, [state, showNotification, router])
+
+  if (session === undefined) {
+    return(
+      <div>
+        <p>
+          Loading...
+        </p>
+      </div>
+    )
+  }
+
+  if (!session) {
+    return(
+      <div>
+        <p>
+          You need to log-in before you can do that
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="border rounded-l border-gray-300 max-w-2xl mx-auto my-16 p-6">

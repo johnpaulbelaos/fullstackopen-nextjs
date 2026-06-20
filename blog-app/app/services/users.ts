@@ -12,3 +12,25 @@ export const getUserWithBlogs = async (username: string) => {
     with: { blogs: true },
   })
 }
+
+export const tokenGetUserWithBlogs = async (token: string) => {
+  return db.query.users.findFirst({
+    where: eq(users.token, token),
+    with: { blogs: true },
+  })
+}
+
+export const generateToken = async (id: number) => {
+  const user = await db.query.users.findFirst({
+    where: eq(users.id, id),
+  })
+
+  const token = crypto.randomUUID()
+
+  if (user) {
+    await db
+      .update(users)
+      .set({ token })
+      .where(eq(users.id, id))
+  }
+}
