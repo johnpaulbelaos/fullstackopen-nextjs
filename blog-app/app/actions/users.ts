@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache"
 import { eq } from "drizzle-orm"
 import { db } from "@/db"
 import { users } from "@/db/schema"
-import { generateToken } from "../services/users"
+import { generateToken, markAsRead } from "../services/users"
 
 export const registerUser = async (
   prevState: { errors: { error: string }, values: { username: string, name: string, password: string, passwordConfirm: string }},
@@ -50,5 +50,11 @@ export const registerUser = async (
 export const generateUserToken = async (formData: FormData) => {
   const id = Number(formData.get("id"))
   await generateToken(id)
+  revalidatePath("/me")
+}
+
+export const markBlogAsRead = async (formData: FormData) => {
+  const id = Number(formData.get("id"))
+  await markAsRead(id)
   revalidatePath("/me")
 }

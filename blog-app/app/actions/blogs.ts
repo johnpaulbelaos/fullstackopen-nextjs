@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
-import { addBlog, incrementLike } from "../services/blogs"
+import { addBlog, incrementLike, addToReadingList } from "../services/blogs"
 import { auth } from "@/auth"
 
 export const createBlog = async (
@@ -42,4 +42,19 @@ export const incrementBlogLike = async (formData: FormData) => {
 export const searchFilter = async (formData: FormData) => {
   const filter = formData.get("filter") as string
   redirect(`/blogs?filter=${filter}`)
+}
+
+export const addBlogToReadingList = async (formData: FormData) => {
+  const session = await auth()
+  if (!session) {
+    redirect("/login")
+  }
+  
+  const id = Number(formData.get("id"))
+  try {
+    await addToReadingList(id)
+  } catch {
+    console.log('Already in reading list')
+  }
+  revalidatePath("/me")
 }

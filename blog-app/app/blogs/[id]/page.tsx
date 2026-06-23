@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { getBlogById } from "../../services/blogs"
-import { incrementBlogLike } from "../../actions/blogs"
+import { addBlogToReadingList, incrementBlogLike } from "../../actions/blogs"
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
@@ -16,13 +16,21 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
       <p className="text-gray-600 mb-2">
         {"by"} {blog.author}
       </p>
-      <form action={incrementBlogLike} className="mb-4">
-        <input type="hidden" name="id" value={blog.id} />
-        likes: {blog.likes} {" "}
-        <button type="submit" className="border-hidden bg-blue-400 text-white hover:bg-blue-600 rounded ml-2 px-2">
-          {"like"}
-        </button>
-      </form>
+      <div  className="flex mx- auto mb-4">
+        <form action={incrementBlogLike}>
+          <input type="hidden" name="id" value={blog.id} />
+          likes: {blog.likes} {" "}
+          <button type="submit" className="border-hidden bg-blue-400 text-white hover:bg-blue-600 rounded ml-2 px-2">
+            like
+          </button>
+        </form>
+        <form action={addBlogToReadingList}>
+          <input type="hidden" name="id" value={blog.id} />
+          <button type="submit" className="border-hidden bg-green-400 text-white hover:bg-green-600 rounded ml-2 px-2">
+            add to reading list
+          </button>
+        </form>
+      </div>
       <p className="">
         {blog.url}
       </p>

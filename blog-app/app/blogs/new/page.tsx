@@ -49,19 +49,19 @@ const NewBlog = () => {
           <label>
             Title <br/>
           </label>
-            <input type="text" name="title" required minLength={5} className="border rounded-sm mb-3 p-1"/>
+            <input type="text" name="title" required minLength={5} className="border rounded-sm mb-3 w-full p-1"/>
         </div>
         <div>
           <label>
             Author <br/>
           </label>
-            <input type="text" name="author" required minLength={5} className="border rounded-sm mb-3 p-1"/>
+            <input type="text" name="author" required minLength={5} className="border rounded-sm mb-3 w-full p-1"/>
         </div>
         <div>
           <label>
             URL <br/>
           </label>
-            <input type="text" name="url" required minLength={5} className="border rounded-sm mb-1 p-1"/>
+            <input type="text" name="url" required minLength={5} className="border rounded-sm mb-1 w-full p-1"/>
         </div>
         <button type="submit" className="border-hidden bg-blue-400 text-white hover:bg-blue-600 rounded mt-2 px-2">Create</button>
       </form>
