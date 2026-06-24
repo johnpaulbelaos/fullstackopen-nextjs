@@ -1,4 +1,4 @@
-import { eq, ilike, sql, and } from "drizzle-orm"
+import { eq, ilike, sql } from "drizzle-orm"
 import { db } from "@/db"
 import { blogs, readingList } from "@/db/schema"
 import { getCurrentUser } from "./session"

@@ -19,9 +19,9 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{filter?: string}
       <br/>
       <ul className="space-y-2">
         {blogs.map((blog) => (
-          <li key={blog.id} className="border rounded p-3 hover:bg-gray-100">
-            <Link href={`/blogs/${blog.id}`} className="text-blue-600 hover:underline">
-              {blog.title} {"by"} {blog.author} {"from"} {blog.url} {"with"} {blog.likes} {"likes"}
+          <li key={blog.id} className="border rounded p-3 hover:bg-gray-100 text-center">
+            <Link href={`/blogs/${blog.id}`} className="bl  ock text-blue-600">
+              {blog.title} {"by"} {blog.author}
             </Link>
           </li>
         ))}

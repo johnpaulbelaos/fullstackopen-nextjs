@@ -27,22 +27,22 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="border rounded-l border-gray-300 max-w-2xl mx-auto my-16 p-6">
+      <h2 className="text-2xl font-bold mb-2">Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>
             Username
-            <input type="text" name="username" required />
+            <input type="text" name="username" required className="border rounded-sm mb-3 w-full p-1"/>
           </label>
         </div>
         <div>
           <label>
             Password
-            <input type="password" name="password" required />
+            <input type="password" name="password" required className="border rounded-sm mb-3 w-full p-1"/>
           </label>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="border-hidden bg-blue-400 text-white hover:bg-blue-600 rounded mt-2 px-2">Login</button>
       </form>
     </div>
   )
